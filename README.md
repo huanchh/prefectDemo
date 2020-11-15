@@ -4,17 +4,17 @@ Simple hello world program with MINIO, KAFKA, PREFECT to have a MINIO configured
 
 ## MINIO SETUP
 
-###Install And Running kafka 
+### Install And Running kafka 
 
 Git clone from 
 https://github.com/simplesteph/kafka-stack-docker-compose
 
 ```docker-compose -f zk-single-kafka-single.yml up```
 
-###Optioal install kafkacat to inspect kafka topic
+### Optioal install kafkacat to inspect kafka topic
 ```brew install kafkacat```
 
-###Install and Start minIO
+### Install and Start minIO
 
 ```brew install minio/stable/minio```
 
@@ -31,7 +31,7 @@ make a bucket called images
 ```mc mb minio/images```
 
 
-###Configure Kafka notification event on MIN IO object create for images
+### Configure Kafka notification event on MIN IO object create for images
 
 ```mc admin config set minio notify_kafka brokers="localhost:9092" topic="bucketevents"```
 
@@ -47,12 +47,12 @@ verify we can see the object put notification with kafkacat
 
 ```kafkacat -C -b localhost:9092 -t bucketevents```
 
-##PREFECT SETUP
+## PREFECT SETUP
 
 ```pipenv install --pre prefect```
 
 
-##Running
+## Running
 
 
 
@@ -74,10 +74,10 @@ which triggers a s3:ObjectCreated:Put event in bucket "bucketevents"
 
 
 
-##MISC
+## MISC
 debug.ipynb jupyter notebook file to try out code snippets
 
-##TODO
+## TODO
 
 - more Prefect native way to perform event driven triggering of flow, however this still seem to be in development #https://docs.prefect.io/core/PINs/PIN-14-Listener-Flows-2.html
 - as supposed to just running locally, have the flow submit to PREFECT CLOUD
